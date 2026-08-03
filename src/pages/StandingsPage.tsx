@@ -1,10 +1,24 @@
 import StateWrapper from '../components/ui/StateWrapper'
+import { useQuery } from '@tanstack/react-query'
+import fetchStandings from '../services/api'
 import './StandingsPage.css'
 
-// TODO(krystal): fetch standings data (services/api.ts) and wire up
-// TanStack Query here — useQuery, loading/error/data states, etc.
+
 
 export default function StandingsPage() {
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ['standings'],
+    queryFn: fetchStandings
+  })
+
+  if(isLoading) {
+    return <StateWrapper state='loading'>Loading...</StateWrapper>
+  }
+
+  if(isError) {
+    return <StateWrapper state='error'>Error: {error?.message}</StateWrapper>
+  }
+
   return (
     <div className="standings-page">
       <header className="page-header">
