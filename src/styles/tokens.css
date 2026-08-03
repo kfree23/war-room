@@ -1,0 +1,81 @@
+/* War Room design tokens — NBA front-office analytics platform */
+
+:root {
+  /* Color — base surfaces */
+  --color-bg: #0b0e14;
+  --color-bg-elevated: #12151e;
+  --color-bg-sidebar: #0d1017;
+  --color-surface: #161a24;
+  --color-surface-hover: #1c2130;
+  --color-border: #232838;
+  --color-border-subtle: #1a1e2a;
+
+  /* Color — text */
+  --color-text-primary: #e8eaf0;
+  --color-text-secondary: #9aa1b4;
+  --color-text-muted: #5b6178;
+  --color-text-inverse: #0b0e14;
+
+  /* Color — brand / accent (hardwood orange) */
+  --color-accent: #e63946;
+  --color-accent-hover: #ff8f5c;
+  --color-accent-muted: #4a2c1c;
+
+  /* Color — status */
+  --color-success: #35c98f;
+  --color-success-muted: #16332a;
+  --color-warning: #f2b84b;
+  --color-warning-muted: #3a2e14;
+  --color-danger: #f2554f;
+  --color-danger-muted: #3a1a1a;
+  --color-info: #4d9cf2;
+  --color-info-muted: #16283a;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+  --font-mono: 'SF Mono', ui-monospace, Menlo, monospace;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.8125rem;
+  --font-size-md: 0.9375rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+
+  /* Layout */
+  --sidebar-width: 240px;
+  --header-height: 56px;
+
+  /* Motion */
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+}

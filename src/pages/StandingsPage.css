@@ -1,0 +1,5 @@
+@import '../styles/page.css';
+
+.standings-page {
+  max-width: 960px;
+}
