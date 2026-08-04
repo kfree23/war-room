@@ -2,4 +2,73 @@
 
 .standings-page {
   max-width: 960px;
+  min-height: 100%;
+  padding: var(--space-6);
+}
+
+/* Conference filter buttons */
+.standings-page > div > div {
+  display: inline-flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.standings-page > div > div > button {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+}
+
+/* Standings table */
+.standings-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.standings-page thead th {
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.standings-page thead th:nth-child(n + 3)::after {
+  content: '↑↓';
+  margin-left: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.standings-page tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.standings-page tbody tr:hover {
+  background: var(--color-surface-hover);
+}
+
+.standings-page tbody td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-primary);
+}
+
+.standings-page tbody td img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.standings-page > div > div > button.active {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }

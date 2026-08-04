@@ -61,9 +61,15 @@ export default function StandingsPage() {
         {
           <div>
             <div>
-            <button onClick={() => setConference('all')}>All</button>
-            <button onClick={() => setConference('east')}>East</button>
-            <button onClick={() => setConference('west')}>West</button>
+            <button onClick={() => setConference('all')}
+              className={conference === 'all' ? 'active' : ''}
+              >All</button>
+            <button onClick={() => setConference('east')}
+              className={conference === 'east' ? 'active' : ''}
+              >East</button>
+            <button onClick={() => setConference('west')}
+              className={conference === 'west' ? 'active' : ''}
+              >West</button>
           </div>
 
           <table>
