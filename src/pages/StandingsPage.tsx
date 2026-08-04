@@ -2,6 +2,7 @@ import StateWrapper from '../components/ui/StateWrapper'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import fetchStandings from '../services/api'
+import type { TeamEntry } from '../types';
 import './StandingsPage.css'
 
 
@@ -47,19 +48,24 @@ export default function StandingsPage() {
               <tr>
                 <th>Logo</th>
                 <th>Team</th>
+                <th>W</th>
+                <th>L</th>
+                <th>PPG</th>
+                <th>OPP PPG</th>
+                <th>DIFF</th>
               </tr>
             </thead>
             <tbody>
               {
-                displayedTeams.map((entry) => (
+                displayedTeams.map((entry: TeamEntry) => (
                   <tr key={entry.team.id}>
                     <td><img src={entry.team.logos[0].href} /></td>
                     <td>{entry.team.displayName}</td>
                     <td>{entry.stats.find(s => s.name === 'wins')?.value}</td>
                     <td>{entry.stats.find(s => s.name === 'losses')?.value}</td>
-                    <td>{entry.stats.find(s => s.name === 'avgPointsFor')?.value}</td>
-                    <td>{entry.stats.find(s => s.name === 'avgPointsAgainst')?.value}</td>
-                    <td>{entry.stats.find(s => s.name === 'differential')?.value}</td>
+                    <td>{entry.stats.find(s => s.name === 'avgPointsFor')?.value.toFixed(1)}</td>
+                    <td>{entry.stats.find(s => s.name === 'avgPointsAgainst')?.value.toFixed(1)}</td>
+                    <td>{entry.stats.find(s => s.name === 'differential')?.value.toFixed(1)}</td>
                   </tr>
                 ))}
             </tbody>

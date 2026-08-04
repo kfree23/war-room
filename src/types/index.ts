@@ -3,6 +3,17 @@
 
 export interface TeamEntry {
   // TODO(krystal): you write this
+    team: {
+      id: string,
+      displayName: string,
+      logos: {
+        href: string
+      } []
+    }
+    stats: {
+      name: string
+      value: number
+    }[]
 }
 
 export interface Standing {
