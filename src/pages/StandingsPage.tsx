@@ -9,6 +9,8 @@ import './StandingsPage.css'
 
 export default function StandingsPage() {
   const [conference, setConference] = useState<'all' | 'east' | 'west'>('all');
+  const [sortKey, setSortKey] = useState<string>('wins');
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['standings'],
@@ -31,6 +33,15 @@ export default function StandingsPage() {
   const displayedTeams = conference === 'all' ? [...east, ...west]
     : conference === 'east' ? east : west;
 
+  const sortedTeams = [...displayedTeams].sort((a, b) => {
+    const aValue = a.stats.find(s => s.name === sortKey)?.value ?? 0;
+    const bValue = b.stats.find(s => s.name === sortKey)?.value ?? 0;
+      return sortDir === 'desc' ? bValue - aValue : aValue - bValue;
+  })
+
+  const handleSort = () => {
+    
+  }
 
   return (
     <div className="standings-page">
