@@ -1,4 +1,5 @@
 import StateWrapper from '../components/ui/StateWrapper'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import fetchStandings from '../services/api'
 import './StandingsPage.css'
@@ -6,18 +7,29 @@ import './StandingsPage.css'
 
 
 export default function StandingsPage() {
+  const [conference, setConference] = useState<'all' | 'east' | 'west'>('all');
+
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ['standings'],
     queryFn: fetchStandings
   })
 
-  if(isLoading) {
+  if (isLoading) {
     return <StateWrapper state='loading'>Loading...</StateWrapper>
   }
 
-  if(isError) {
+  if (isError) {
     return <StateWrapper state='error'>Error: {error?.message}</StateWrapper>
   }
+
+
+  const east = data?.east ?? [];
+  const west = data?.west ?? [];
+
+
+  const displayedTeams = conference === 'all' ? [...east, ...west]
+    : conference === 'east' ? east : west;
+
 
   return (
     <div className="standings-page">
@@ -27,9 +39,34 @@ export default function StandingsPage() {
       </header>
 
       {/* TODO(krystal): replace state="empty" with your query's derived state */}
-      <StateWrapper state="empty" emptyLabel="No standings data loaded yet.">
+      {/* <StateWrapper state="ready" emptyLabel="No standings data loaded yet."> */}
         {/* TODO(krystal): you write this — table/list of TeamEntry / Standing rows */}
-      </StateWrapper>
+        {
+          <table>
+            <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Team</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                displayedTeams.map((entry) => (
+                  <tr key={entry.team.id}>
+                    <td><img src={entry.team.logos[0].href} /></td>
+                    <td>{entry.team.displayName}</td>
+                    <td>{entry.stats.find(s => s.name === 'wins')?.value}</td>
+                    <td>{entry.stats.find(s => s.name === 'losses')?.value}</td>
+                    <td>{entry.stats.find(s => s.name === 'avgPointsFor')?.value}</td>
+                    <td>{entry.stats.find(s => s.name === 'avgPointsAgainst')?.value}</td>
+                    <td>{entry.stats.find(s => s.name === 'differential')?.value}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+
+        }
+      {/* </StateWrapper> */}
     </div>
   )
 }
