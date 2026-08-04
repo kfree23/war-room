@@ -34,13 +34,18 @@ export default function StandingsPage() {
     : conference === 'east' ? east : west;
 
   const sortedTeams = [...displayedTeams].sort((a, b) => {
-    const aValue = a.stats.find(s => s.name === sortKey)?.value ?? 0;
-    const bValue = b.stats.find(s => s.name === sortKey)?.value ?? 0;
+    const aValue = a.stats.find((s: { name: string; value:number}) => s.name === sortKey)?.value ?? 0;
+    const bValue = b.stats.find((s: { name: string; value:number}) => s.name === sortKey)?.value ?? 0;
       return sortDir === 'desc' ? bValue - aValue : aValue - bValue;
   })
 
-  const handleSort = () => {
-    
+  const handleSort = (key: string) => {
+    if(key === sortKey) {
+      setSortDir(sortDir === 'desc' ? 'asc' : 'desc')
+    } else {
+      setSortKey(key)
+      setSortDir('desc')
+    }
   }
 
   return (
@@ -54,21 +59,28 @@ export default function StandingsPage() {
       {/* <StateWrapper state="ready" emptyLabel="No standings data loaded yet."> */}
         {/* TODO(krystal): you write this — table/list of TeamEntry / Standing rows */}
         {
+          <div>
+            <div>
+            <button onClick={() => setConference('all')}>All</button>
+            <button onClick={() => setConference('east')}>East</button>
+            <button onClick={() => setConference('west')}>West</button>
+          </div>
+
           <table>
             <thead>
               <tr>
                 <th>Logo</th>
                 <th>Team</th>
-                <th>W</th>
-                <th>L</th>
-                <th>PPG</th>
-                <th>OPP PPG</th>
-                <th>DIFF</th>
+                <th onClick={() => handleSort('wins')}>W</th>
+                <th onClick={() => handleSort('losses')}>L</th>
+                <th onClick={() => handleSort('avgPointsFor')}>PPG</th>
+                <th onClick={() => handleSort('avgPointsAgainst')}>OPP PPG</th>
+                <th onClick={() => handleSort('differential')}>DIFF</th>
               </tr>
             </thead>
             <tbody>
               {
-                displayedTeams.map((entry: TeamEntry) => (
+                sortedTeams.map((entry: TeamEntry) => (
                   <tr key={entry.team.id}>
                     <td><img src={entry.team.logos[0].href} /></td>
                     <td>{entry.team.displayName}</td>
@@ -82,6 +94,8 @@ export default function StandingsPage() {
             </tbody>
           </table>
 
+          </div>
+          
         }
       {/* </StateWrapper> */}
     </div>
