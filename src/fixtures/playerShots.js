@@ -1,4 +1,4 @@
-[
+const playerShots = [
   {
     "player_name": "LeBron James",
     "shot_made": "FALSE",
@@ -10152,3 +10152,4 @@
     "loc_y": 4.85
   }
 ]
+export default playerShots;

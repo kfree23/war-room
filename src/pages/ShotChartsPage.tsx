@@ -1,10 +1,26 @@
+import { useState } from 'react';
 import Badge from '../components/ui/Badge'
 import '../styles/page.css'
 import '../styles/coming-soon.css'
+import playerShots from '../fixtures/playerShots' 
+import type { Shot } from '../types'
 
-// TODO(krystal): you write this
+
 
 export default function ShotChartsPage() {
+
+  const [shotType, setShotType] = useState<'allShots' | 'twoPointers' | 'threePointers'>('allShots');
+
+  const filteredTwoPointers = playerShots.filter((shot: Shot) => {
+    return shot.shot_type === '2PT Field Goal'
+  })
+
+    const filteredThreePointers = playerShots.filter((shot: Shot) => {
+    return shot.shot_type === '3PT Field Goal'
+  })
+
+    const displayShots = shotType === 'allShots' ? [...filteredTwoPointers, ...filteredThreePointers] : shotType === 'twoPointers' ? filteredTwoPointers : filteredThreePointers;
+
   return (
     <div>
       <header className="page-header">

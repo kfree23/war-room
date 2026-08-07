@@ -16,6 +16,15 @@ export interface TeamEntry {
     }[]
 }
 
-export interface Standing {
-  // TODO(krystal): you write this
+// export interface Standing {
+
+// }
+
+export interface Shot {
+  player_name: string,
+  shot_made: string,
+  shot_type: string,
+  basic_zone: string,
+  loc_x: number,
+  loc_y: number
 }
