@@ -1,5 +1,7 @@
-const playerShots = [
-  {
+import type { Shot } from '../types/index';
+
+const playerShots: Shot[] = [
+ {
     "player_name": "LeBron James",
     "shot_made": "FALSE",
     "shot_type": "2PT Field Goal",
@@ -10151,5 +10153,6 @@ const playerShots = [
     "loc_x": 1.2,
     "loc_y": 4.85
   }
-]
+];
+
 export default playerShots;

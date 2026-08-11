@@ -16,9 +16,6 @@ export interface TeamEntry {
     }[]
 }
 
-// export interface Standing {
-
-// }
 
 export interface Shot {
   player_name: string,
