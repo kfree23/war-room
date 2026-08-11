@@ -28,12 +28,18 @@ export default function ShotChartsPage() {
         <p className="page-header__subtitle">Shot location and efficiency visualizations</p>
       </header>
 
-      <div className="coming-soon">
+      <div>
+        <button onClick={() => setShotType('allShots')} className={shotType === 'allShots' ? 'active' : ''}>All Shots</button>
+        <button onClick={() => setShotType('twoPointers')} className={shotType === 'twoPointers' ? 'active' : ''}>2FG</button>
+        <button onClick={() => setShotType('threePointers')} className={shotType === 'threePointers' ? 'active' : ''}>3FG</button>
+      </div>
+
+      {/* <div className="coming-soon">
         <Badge variant="info">Coming Soon</Badge>
         <p className="coming-soon__text">
           Shot chart visualizations aren't wired up yet.
         </p>
-      </div>
+      </div> */}
     </div>
   )
 }
