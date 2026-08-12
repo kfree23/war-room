@@ -16,7 +16,8 @@ export default function ShotChart({ shots }: ShotChartProps) {
         .range([0, 470])
 
     return (
-        <svg width={500} height={470}>
+        <div>
+            <svg width={500} height={470}>
             <Court />
             {shots.map((shot, i) => {
                 return <circle key={i}
@@ -26,6 +27,25 @@ export default function ShotChart({ shots }: ShotChartProps) {
                 fill={shot.shot_made === "TRUE" ? "#4ade80" : "#f87171"}
                 />
             })}
-        </svg>
+
+            </svg>
+
+            <div className="legend">
+                <span>
+                    <svg width={10} height={10}>
+                        <circle cx={5} cy={5} r={5} fill="#4ade80" />
+                    </svg>
+                    Make
+                </span>
+                <span>
+                    <svg width={10} height={10}>
+                        <circle cx={5} cy={5} r={5} fill="#f87171" />
+                    </svg>
+                    Miss
+                </span>
+            </div>
+        </div>
+
     )
 }
+
