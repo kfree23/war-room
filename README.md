@@ -1,75 +1,42 @@
-# React + TypeScript + Vite
+# War Room
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A front office tool for coaches and GMs. Track shooting, scout players, follow the standings, and build a draft board in one place instead of jumping between five tabs.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Standings** — league and conference standings pulled from live data
+* **Shot Charts** — shot location and efficiency by zone, rendered with D3
+* **Scouting** — player evaluation notes and stat breakdowns *(in progress)*
+* **Draft Board** — rank and reorder prospects into a working board *(in progress)*
 
-## React Compiler
+## Status
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The frontend is deployed and Standings and Shot Charts are functional. Scouting and the Draft Board are still being built, and the Node/PostgreSQL backend isn't deployed yet, so persisted data isn't live in the demo.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* React
+* TypeScript
+* React Router
+* TanStack Query
+* D3.js
+* Node.js
+* PostgreSQL
+* ESPN unofficial API (no key required)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Live Demo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+https://war-room-jade.vercel.app/
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Screenshot
+<img width="1423" height="788" alt="Screenshot 2026-08-17 at 1 21 07 PM" src="https://github.com/user-attachments/assets/8b61a32e-126e-448a-9bee-369e99fda254" />
+
+## Running Locally
 
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+git clone https://github.com/kfree23/war-room
+cd war-room
+npm install
+npm run dev
 ```
+
