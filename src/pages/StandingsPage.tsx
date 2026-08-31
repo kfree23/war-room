@@ -2,7 +2,7 @@ import StateWrapper from '../components/ui/StateWrapper'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import fetchStandings from '../services/api'
-import type { TeamEntry } from '../types';
+import type { StandingRow } from '../types/index';
 import './StandingsPage.css'
 
 
@@ -34,8 +34,8 @@ export default function StandingsPage() {
     : conference === 'east' ? east : west;
 
   const sortedTeams = [...displayedTeams].sort((a, b) => {
-    const aValue = a.stats.find((s: { name: string; value:number}) => s.name === sortKey)?.value ?? 0;
-    const bValue = b.stats.find((s: { name: string; value:number}) => s.name === sortKey)?.value ?? 0;
+    const aValue = a[sortKey as keyof typeof a];
+    const bValue = b[sortKey as keyof typeof b]
       return sortDir === 'desc' ? bValue - aValue : aValue - bValue;
   })
 
@@ -79,22 +79,22 @@ export default function StandingsPage() {
                 <th>Team</th>
                 <th onClick={() => handleSort('wins')}>W</th>
                 <th onClick={() => handleSort('losses')}>L</th>
-                <th onClick={() => handleSort('avgPointsFor')}>PPG</th>
-                <th onClick={() => handleSort('avgPointsAgainst')}>OPP PPG</th>
-                <th onClick={() => handleSort('differential')}>DIFF</th>
+                <th onClick={() => handleSort('ppg')}>PPG</th>
+                <th onClick={() => handleSort('opp_ppg')}>OPP PPG</th>
+                <th onClick={() => handleSort('diff')}>DIFF</th>
               </tr>
             </thead>
             <tbody>
               {
-                sortedTeams.map((entry: TeamEntry) => (
-                  <tr key={entry.team.id}>
-                    <td><img src={entry.team.logos[0].href} /></td>
-                    <td>{entry.team.displayName}</td>
-                    <td>{entry.stats.find(s => s.name === 'wins')?.value}</td>
-                    <td>{entry.stats.find(s => s.name === 'losses')?.value}</td>
-                    <td>{entry.stats.find(s => s.name === 'avgPointsFor')?.value.toFixed(1)}</td>
-                    <td>{entry.stats.find(s => s.name === 'avgPointsAgainst')?.value.toFixed(1)}</td>
-                    <td>{entry.stats.find(s => s.name === 'differential')?.value.toFixed(1)}</td>
+                sortedTeams.map((entry: StandingRow) => (
+                  <tr key={entry.team_name}>
+                    <td><img src={entry.logo} /></td>
+                    <td>{entry.team_name}</td>
+                    <td>{entry.wins}</td>
+                    <td>{entry.losses}</td>
+                    <td>{entry.ppg}</td>
+                    <td>{entry.opp_ppg}</td>
+                    <td>{entry.diff}</td>
                   </tr>
                 ))}
             </tbody>

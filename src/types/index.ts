@@ -1,8 +1,4 @@
-// War Room — shared domain types
-// TODO(krystal): define these shapes to match the data you're working with
-
 export interface TeamEntry {
-  // TODO(krystal): you write this
     team: {
       id: string,
       displayName: string,
@@ -24,4 +20,15 @@ export interface Shot {
   basic_zone: string,
   loc_x: number,
   loc_y: number
+}
+
+export interface StandingRow {
+  team_name: string;
+  logo: string;
+  conference: string;
+  wins: number;
+  losses: number;
+  ppg: number;
+  opp_ppg: number;
+  diff: number;
 }
