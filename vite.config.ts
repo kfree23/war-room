@@ -1,7 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://site.api.espn.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      '/espn-site': {
+        target: 'https://site.api.espn.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/espn-site/, '')
+      },
+      '/espn-athlete': {
+        target: 'https://site.web.api.espn.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/espn-athlete/, '')
+      }
+    }
+  }
 })

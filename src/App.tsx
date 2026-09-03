@@ -4,6 +4,7 @@ import StandingsPage from './pages/StandingsPage'
 import ShotChartsPage from './pages/ShotChartsPage'
 import ScoutingPage from './pages/ScoutingPage'
 import DraftBoardPage from './pages/DraftBoardPage'
+import '../src/services/api'
 
 export default function App() {
   return (
