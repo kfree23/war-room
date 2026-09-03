@@ -1,10 +1,29 @@
-import Badge from '../components/ui/Badge'
-import '../styles/page.css'
-import '../styles/coming-soon.css'
+import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import fetchStandings, { fetchTeams, fetchRoster, fetchAthlete } from '../services/api';
 
-// TODO(krystal): you write this
+
 
 export default function ScoutingPage() {
+  const [ selectedTeamId, setSelectedTeamId ] = useState<string | null>(null);
+  const [ selectedAthleteId, setSelectedAthleteId ] = useState<string | null>(null);
+
+
+  const { data: teams } = useQuery({ queryKey: ['nba-teams'], queryFn: fetchTeams });
+
+  const { data: roster } = useQuery({
+    queryKey: ['roster', selectedTeamId],
+    queryFn: () => fetchRoster(selectedTeamId!),
+    enabled: !!selectedTeamId
+  })
+
+  const { data: profile } = useQuery({
+    queryKey: ['athlete', selectedAthleteId],
+    queryFn: () => fetchAthlete(selectedAthleteId!),
+    enabled: !!selectedAthleteId
+  })
+
+
   return (
     <div>
       <header className="page-header">
