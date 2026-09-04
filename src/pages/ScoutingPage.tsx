@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import fetchStandings, { fetchTeams, fetchRoster, fetchAthlete } from '../services/api';
+import StateWrapper from '../components/ui/StateWrapper';
 
 
 
@@ -9,7 +10,7 @@ export default function ScoutingPage() {
   const [ selectedAthleteId, setSelectedAthleteId ] = useState<string | null>(null);
 
 
-  const { data: teams } = useQuery({ queryKey: ['nba-teams'], queryFn: fetchTeams });
+  const { data: teams, isLoading: teamsLoading } = useQuery({ queryKey: ['nba-teams'], queryFn: fetchTeams });
 
   const { data: roster } = useQuery({
     queryKey: ['roster', selectedTeamId],
@@ -23,6 +24,10 @@ export default function ScoutingPage() {
     enabled: !!selectedAthleteId
   })
 
+  if (teamsLoading) {
+    return <StateWrapper state="loading"/>
+  }
+
 
   return (
     <div>
@@ -31,12 +36,22 @@ export default function ScoutingPage() {
         <p className="page-header__subtitle">Prospect reports and evaluation notes</p>
       </header>
 
-      <div className="coming-soon">
-        <Badge variant="info">Coming Soon</Badge>
-        <p className="coming-soon__text">
-          Scouting reports aren't wired up yet.
-        </p>
-      </div>
+      <select value={selectedTeamId ?? ''} onChange={(e) => setSelectedTeamId(e.target.value)}>
+        <option value="">Select a team</option>
+        {teams.map((team: {
+          team: {
+            id: string;
+            displayName: string,
+            logo: string
+          }
+        }) => {
+          return (
+            <option key={team.team.id} value={team.team.id}>
+              {team.team.displayName}
+            </option>
+          )
+        })}
+      </select>
     </div>
   )
 }
