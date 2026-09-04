@@ -35,9 +35,18 @@ export default function ScoutingPage() {
     return <StateWrapper state="loading" />
   }
 
+  const playerName = profile?.displayName;
+  const playerHeadshot = profile?.headshot?.href;
+  const height = profile?.displayHeight;
+  const weight = profile?.displayWeight;
+  const age = profile?.age;
+  const jerseyNum = profile?.jersey;
+  const teamName = profile?.team.displayName;
+  const position = profile?.position?.name;
   const ppg = profile?.statsSummary?.statistics?.find((s: Statistic) => s.name === 'avgPoints')?.value.toFixed(1);
   const rpg = profile?.statsSummary?.statistics?.find((s: Statistic) => s.name === 'avgRebounds')?.value.toFixed(1);
   const apg = profile?.statsSummary?.statistics?.find((s: Statistic) => s.name === 'avgAssists')?.value.toFixed(1);
+  const fieldGoalPercentage = profile?.statsSummary?.statistics?.find((s: Statistic) => s.name === 'fieldGoalPct')?.value.toFixed(1);
 
 
   return (
@@ -85,14 +94,21 @@ export default function ScoutingPage() {
       {selectedTeamId && roster && profile && (
         <div>
           <header>
-            {profile.displayName}
-            <img src={profile.headshot.href} alt={profile.displayName} />
+            {playerName}
+            <img src={playerHeadshot} alt={playerName} />
+            <span>Team: {teamName}</span>
+            <span>Height: {height}</span>
+            <span>Weight: {weight}</span>
+            <span>Age: {age}</span>
+            <span>Jersey Number: {jerseyNum}</span>
           </header>
 
           <div>
+            <span>Position: {position}</span>
             <span>PPG: {ppg}</span>
             <span>RPG: {rpg}</span>
             <span>APG: {apg}</span>
+            <span>FG%: {fieldGoalPercentage}</span>
           </div>
         </div>
       )}
