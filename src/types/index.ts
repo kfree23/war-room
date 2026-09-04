@@ -32,3 +32,9 @@ export interface StandingRow {
   opp_ppg: number;
   diff: number;
 }
+
+export interface Statistic {
+  name: string;
+  value: number;
+  displayValue: string;
+}
