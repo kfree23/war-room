@@ -3,23 +3,23 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://site.api.espn.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      },
-      '/espn-site': {
-        target: 'https://site.api.espn.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/espn-site/, '')
-      },
-      '/espn-athlete': {
-        target: 'https://site.web.api.espn.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/espn-athlete/, '')
-      }
-    }
-  }
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'https://site.api.espn.com',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/api/, '')
+  //     },
+  //     '/espn-site': {
+  //       target: 'https://site.api.espn.com',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/espn-site/, '')
+  //     },
+  //     '/espn-athlete': {
+  //       target: 'https://site.web.api.espn.com',
+  //       changeOrigin: true,
+  //       rewrite: (path) => path.replace(/^\/espn-athlete/, '')
+  //     }
+  //   }
+  // }
 })
