@@ -55,9 +55,6 @@ export default function StandingsPage() {
         <p className="page-header__subtitle">League standings by conference and division</p>
       </header>
 
-      {/* TODO(krystal): replace state="empty" with your query's derived state */}
-      {/* <StateWrapper state="ready" emptyLabel="No standings data loaded yet."> */}
-        {/* TODO(krystal): you write this — table/list of TeamEntry / Standing rows */}
         {
           <div>
             <div>

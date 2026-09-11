@@ -1,33 +1,35 @@
 import type { StandingRow } from '../types/index';
 
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-const BASE_URL = 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba';
-const ATHLETE_URL = 'https://site.web.api.espn.com/apis/common/v3/sports/basketball/nba';
-// const BASE_URL = '/espn-site/apis/site/v2/sports/basketball/nba';
-// const ATHLETE_URL = '/espn-athlete/apis/common/v3/sports/basketball/nba';
 
 
 export default async function fetchStandings() {
-    const response = await fetch(`${API_BASE_URL}/api/nba/standings`)
-    if (!response.ok) {
-        throw new Error(`Something went wrong: ${response.status}`)
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/nba/standings`)
+        if (!response.ok) {
+            throw new Error(`Something went wrong: ${response.status}`)
+        }
+        const data = await response.json();
+        return {
+            east: data.filter((row: StandingRow) => row.conference === 'East'),
+            west: data.filter((row: StandingRow) => row.conference === 'West')
+        }
+    } catch(err) {
+        console.error(err)
+        throw err
     }
-    const data = await response.json();
-    return {
-        east: data.filter((row: StandingRow) => row.conference === 'East'),
-        west: data.filter((row: StandingRow) => row.conference === 'West')
-    }
+    
 }
 
 export async function fetchTeams() {
 
     try {
-        const response = await fetch(`${BASE_URL}/teams`);
+        const response = await fetch(`${API_BASE_URL}/api/espn/teams`);
         if (!response.ok) {
             throw new Error(`Something went wrong ${response.status}`)
         }
         const data = await response.json();
-        return data.sports[0].leagues[0].teams;
+        return data;
 
     } catch (err) {
         console.error(err)
@@ -37,13 +39,13 @@ export async function fetchTeams() {
 
 export async function fetchRoster(teamId: string) {
     try {
-        const response = await fetch(`${BASE_URL}/teams/${teamId}/roster`);
+        const response = await fetch(`${API_BASE_URL}/api/espn/teams/${teamId}/roster`);
         if (!response.ok) {
             throw new Error(`Something went wrong ${response.status}`)
         }
 
         const data = await response.json();
-        return data.athletes;
+        return data;
     } catch(err) {
         console.error(err)
         throw err
@@ -52,12 +54,12 @@ export async function fetchRoster(teamId: string) {
 
 export async function fetchAthlete(athleteId: string) {
     try {
-        const response = await fetch(`${ATHLETE_URL}/athletes/${athleteId}`);
+        const response = await fetch(`${API_BASE_URL}/api/espn/athletes/${athleteId}`);
         if(!response.ok) {
             throw new Error(`Something went wrong ${response.status}`)
         }
         const data = await response.json();
-        return data.athlete;
+        return data;
     } catch(err) {
         console.error(err)
         throw err
